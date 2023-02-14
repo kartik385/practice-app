@@ -1,15 +1,17 @@
 {
   "expo": {
     "name": "practice-app",
-    "slug": "practice-app",
+    "slug": "practice",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
+    "userInterfaceStyle": "automatic",
+  
+    
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#5c16c5"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -24,10 +26,17 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.skywalker007.practice"
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "03cb782d-009e-4eda-8d7c-4cb87b94c624"
+      }
+    },
+    "owner": "skywalker007"
   }
 }
