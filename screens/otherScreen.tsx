@@ -20,7 +20,6 @@ const InfoScreen = () => {
     navigation.goBack();
   };
 
-  console.log(params);
   return (
     <ScrollView>
       <View className="relative">

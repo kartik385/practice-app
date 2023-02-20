@@ -11,7 +11,7 @@ const CarouselCardItem = ({
   item,
   index,
 }: {
-  item: AiringShow;
+  item: AiringShow | undefined;
   index: number;
 }) => {
   // const navigation = useNavigation<StackNavigation>();
@@ -22,7 +22,7 @@ const CarouselCardItem = ({
     <Pressable key={index}>
       <Image
         source={{
-          uri: `https://image.tmdb.org/t/p/w500/${item.poster_path}`,
+          uri: `https://image.tmdb.org/t/p/w500/${item?.poster_path}`,
         }}
         className={`w-[${ITEM_WIDTH}px] h-72 object-cover`}
       />

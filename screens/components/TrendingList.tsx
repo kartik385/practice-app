@@ -5,6 +5,7 @@ import TrendingCard from "./TrendingCard";
 import { AiringShow, ResponseObject } from "../../types/tmdb";
 import { api } from "../../api/axios";
 import NoRowLoader from "./NoRowLoader";
+import useFetchShows from "../../hooks/useFetchShows";
 
 const TrendingList = ({
   header,
@@ -17,23 +18,9 @@ const TrendingList = ({
     return <TrendingCard {...item} />;
   };
 
-  const [data, setData] = React.useState<AiringShow[]>([]);
+  const { isLoading, isError, data, error } = useFetchShows(apiUrl);
 
-  const getAiring = async () => {
-    try {
-      const res = await api.get<ResponseObject>(`/${apiUrl}`);
-      const { data } = res;
-      const { results } = data;
-
-      setData(results);
-    } catch (err) {}
-  };
-
-  useEffect(() => {
-    getAiring();
-  }, []);
-
-  if (data.length === 0) {
+  if (isLoading) {
     return (
       <View>
         <Text className="font-bold text-xl px-4 pt-2 text-primary-Vblack ">
