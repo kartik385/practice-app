@@ -2,7 +2,7 @@ import React from "react";
 import { View } from "react-native";
 import Carousel, { Pagination } from "react-native-snap-carousel";
 import CarouselCardItem, { SLIDER_WIDTH, ITEM_WIDTH } from "./CarouselCardItem";
-import { api } from "../../api/axios";
+
 import NoRowLoader from "./NoRowLoader";
 import useFetchShows from "../../hooks/useFetchShows";
 
@@ -27,7 +27,7 @@ const CarouselCards = () => {
           layout="stack"
           layoutCardOffset={9}
           ref={isCarousel}
-          data={data}
+          data={data.slice(0, 6)}
           renderItem={CarouselCardItem}
           sliderWidth={SLIDER_WIDTH}
           autoplay={true}

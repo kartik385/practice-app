@@ -5,11 +5,11 @@ import { AiringShow, ResponseObject } from "../types/tmdb";
 
 const fetchShows = async (url: string) => {
   console.log(url);
-  return api.get<ResponseObject>(`/${url}`);
+  return api.get<ResponseObject>(`/${url}?`);
 };
 
-function dataConvertor(data: AxiosResponse): AiringShow[] {
-  return data.data.results;
+function dataConvertor(data: AxiosResponse) {
+  return data.data.results as AiringShow[];
 }
 
 const useFetchShows = (url: string) => {

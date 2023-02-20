@@ -11,3 +11,5 @@ export type RootStackParamList = {
 };
 
 export type StackNavigation = NativeStackNavigationProp<RootStackParamList>;
+
+export type InfoRouteProps = RouteProp<RootStackParamList, "Info">;

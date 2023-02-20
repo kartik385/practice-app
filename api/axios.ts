@@ -6,6 +6,6 @@ export const api = axios.create({
 });
 
 api.interceptors.request.use((config) => {
-  config.url += `?api_key=${"f5a3bc89dadbd14aede106400bf19a2d"}&language=en-US&page=1`;
+  config.url += `api_key=${"f5a3bc89dadbd14aede106400bf19a2d"}&language=en-US&region=US&page=1`;
   return config;
 });

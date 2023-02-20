@@ -1,16 +1,19 @@
 import { View, Text, ScrollView, Image, TouchableOpacity } from "react-native";
-import React, { useEffect } from "react";
+import React, { useEffect, useLayoutEffect } from "react";
 import { useNavigation, useRoute } from "@react-navigation/native";
-import { StackNavigation } from "../types/type";
+import { InfoRouteProps, StackNavigation } from "../types/type";
 import { AiringShow } from "../types/tmdb";
 import { AntDesign } from "@expo/vector-icons";
+import useFetchShow from "../hooks/useFetchShow";
 
 const InfoScreen = () => {
-  const route = useRoute();
+  const route = useRoute<InfoRouteProps>();
   const navigation = useNavigation<StackNavigation>();
-  const params: any = route.params;
+  const params = route.params;
 
-  useEffect(() => {
+  const { isLoading, isError, data, error } = useFetchShow(params.id);
+
+  useLayoutEffect(() => {
     navigation.setOptions({
       headerShown: false,
     });
@@ -19,6 +22,14 @@ const InfoScreen = () => {
   const goBack = () => {
     navigation.goBack();
   };
+
+  if (isLoading || isError) {
+    return (
+      <View>
+        <Text>Loading...</Text>
+      </View>
+    );
+  }
 
   return (
     <ScrollView>

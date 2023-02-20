@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 
 import TrendingCard from "./TrendingCard";
 import { AiringShow, ResponseObject } from "../../types/tmdb";
-import { api } from "../../api/axios";
+
 import NoRowLoader from "./NoRowLoader";
 import useFetchShows from "../../hooks/useFetchShows";
 
