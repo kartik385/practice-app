@@ -1,5 +1,5 @@
 import { View, Text, Image, TouchableOpacity, ScrollView } from "react-native";
-import React, { useEffect } from "react";
+import React, { useEffect, useLayoutEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { StackNavigation } from "../types/type";
@@ -7,12 +7,13 @@ import { StackNavigation } from "../types/type";
 import CarouselCards from "./components/CorouselCards";
 import TrendingList from "./components/TrendingList";
 import Constants from "expo-constants";
+import Animated, { SlideInUp } from "react-native-reanimated";
 const Homescreen = () => {
   const apiUrl = Constants.expoConfig?.extra?.apiUrl;
   console.log(apiUrl);
   const navigation = useNavigation<StackNavigation>();
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     navigation.setOptions({
       headerShown: false,
     });
@@ -27,7 +28,10 @@ const Homescreen = () => {
           paddingBottom: 15,
         }}
       >
-        <View className="flex-row items-center px-4 py-4 bg-white justify-between space-x-4 dark:bg-slate-800">
+        <Animated.View
+          entering={SlideInUp.duration(5000)}
+          className="flex-row items-center px-4 py-4 bg-white justify-between space-x-4 dark:bg-slate-800"
+        >
           <Image
             className="h-8 w-8 rounded-full shadow object-contain"
             source={{
@@ -39,7 +43,7 @@ const Homescreen = () => {
               <Text className="text-gray-500 px-2">Search TV Shows...</Text>
             </TouchableOpacity>
           </View>
-        </View>
+        </Animated.View>
         <View>
           <CarouselCards />
         </View>

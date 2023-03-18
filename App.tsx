@@ -22,13 +22,8 @@ function onAppStateChange(status: AppStateStatus) {
   }
 }
 
-const queryClient = new QueryClient({
-  defaultOptions: { queries: { retry: 2 } },
-});
+const queryClient = new QueryClient();
 export default function App() {
-  useOnlineManager();
-
-  useAppState(onAppStateChange);
   return (
     <QueryClientProvider client={queryClient}>
       <NavigationContainer>

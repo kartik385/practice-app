@@ -174,7 +174,7 @@ const fetchShow = async (tvId: number) => {
 };
 
 function dataConvertor(data: AxiosResponse) {
-  return data.data.results as Show[];
+  return data.data.results as Show;
 }
 
 const useFetchShow = (tvId: number) => {

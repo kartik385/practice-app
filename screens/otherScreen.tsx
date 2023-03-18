@@ -5,23 +5,14 @@ import { InfoRouteProps, StackNavigation } from "../types/type";
 import { AiringShow } from "../types/tmdb";
 import { AntDesign } from "@expo/vector-icons";
 import useFetchShow from "../hooks/useFetchShow";
-
+import { Pokemon, useLog } from "../hooks/UseLog";
+import { FlashList, ListRenderItemInfo } from "@shopify/flash-list";
 const InfoScreen = () => {
   const route = useRoute<InfoRouteProps>();
-  const navigation = useNavigation<StackNavigation>();
+
   const params = route.params;
 
-  const { isLoading, isError, data, error } = useFetchShow(params.id);
-
-  useLayoutEffect(() => {
-    navigation.setOptions({
-      headerShown: false,
-    });
-  }, []);
-
-  const goBack = () => {
-    navigation.goBack();
-  };
+  const { data, isLoading, hasNextPage, fetchNextPage, isError } = useLog();
 
   if (isLoading || isError) {
     return (
@@ -32,25 +23,37 @@ const InfoScreen = () => {
   }
 
   return (
-    <ScrollView>
-      <View className="relative">
-        <Image
-          className="w-full h-60 shadow-sm object-cover"
-          source={{
-            uri: `https://image.tmdb.org/t/p/w500/${params.backdrop_path}`,
+    <View className="flex-1 w-full">
+      {data && (
+        <FlashList
+          data={data.pages.map((page) => page).flat()}
+          renderItem={pokemonCard}
+          estimatedItemSize={40}
+          contentContainerStyle={{
+            paddingHorizontal: 12,
+            paddingVertical: 12,
           }}
+          showsVerticalScrollIndicator={false}
+          onEndReachedThreshold={0.5}
+          onEndReached={fetchNextPage}
+          ListFooterComponent={
+            hasNextPage ? (
+              <View className="flex-1 items-center justify-center">
+                <Text className="text-xl">Loading...</Text>
+              </View>
+            ) : null
+          }
         />
-        <View className="absolute inset-x-0 top-8 flex-row px-4">
-          <TouchableOpacity
-            onPress={goBack}
-            className="bg-white rounded-full p-3"
-          >
-            <AntDesign name="arrowleft" size={18} color="#172b4d" />
-          </TouchableOpacity>
-        </View>
-      </View>
-      <Text>OtherScreen</Text>
-    </ScrollView>
+      )}
+    </View>
+  );
+};
+
+const pokemonCard = ({ item }: ListRenderItemInfo<Pokemon>) => {
+  return (
+    <View className="flex-row items-center px-4 py-4 bg-white justify-between space-x-4 dark:bg-slate-800">
+      <Text className="text-purple-800">{item.name}</Text>
+    </View>
   );
 };
 

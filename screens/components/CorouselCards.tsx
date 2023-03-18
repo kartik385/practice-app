@@ -40,7 +40,7 @@ const CarouselCards = () => {
         />
         <View className="bg-yellow-400 absolute inset-x-0 bottom-0 bg-transparent">
           <Pagination
-            dotsLength={data?.length || 0}
+            dotsLength={6}
             activeDotIndex={index}
             carouselRef={isCarousel}
             dotStyle={{
